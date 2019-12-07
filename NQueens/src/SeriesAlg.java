@@ -15,6 +15,56 @@ public class SeriesAlg {
 
 
     /**
+     * Provides the solution to a board of size n x n upon which n queens must
+     * be placed.
+     * 
+     * @param n
+     *            the dimensions of the chessboard and the number of queens to
+     *            place on the board.
+     */
+    private void solve(int n) {
+        this.boardSize = n;
+        board = new int[n][n];
+        switch (getSeries(n)) {
+            case 1:
+                move1(1, n / 3);
+                move1(2, n / 3 * 2);
+                move1(3, n);
+                break;
+            case 2:
+                break;
+            case 3:
+                move1(2, (n - 1) / 3);
+                move1(1, ((n - 1) / 3) * 2 + 1);
+                move1(3, n);
+                break;
+            case 4:
+                break;
+            case 5:
+                move2(1, n / 2);
+                move3(n, (n / 2) + 2);
+                break;
+            case 6:
+                move2(2, (n - 1) / 2);
+                move3(n, (n - 1) / 2 + 2);
+                rule2();
+                break;
+            case 7:
+                move2(1, (n / 2) + 1);
+                move3(n, (n / 2) + 3);
+                board[2][1] = -1;
+                break;
+            case 8:
+                move2(1, (n - 1) / 2 + 2);
+                move3(n, (n - 1) / 2 + 4);
+                board[1][1] = -1;
+                board[3][2] = -1;
+                break;
+        }
+    }
+
+
+    /**
      * Rule 1 is executed when the size of the board falls under one of the
      * following series: {S2, S4}
      */
@@ -89,47 +139,6 @@ public class SeriesAlg {
             a = i;
             count++; // although not in the algorithm, it was probably omitted
                      // unintentionally.
-        }
-    }
-
-
-    private void solve(int n) {
-        this.boardSize = n;
-        switch (getSeries(n)) {
-            case 1:
-                move1(1, n / 3);
-                move1(2, n / 3 * 2);
-                move1(3, n);
-                break;
-            case 2:
-                break;
-            case 3:
-                move1(2, (n - 1) / 3);
-                move1(1, ((n - 1) / 3) * 2 + 1);
-                move1(3, n);
-                break;
-            case 4:
-                break;
-            case 5:
-                move2(1, n / 2);
-                move3(n, (n / 2) + 2);
-                break;
-            case 6:
-                move2(2, (n - 1) / 2);
-                move3(n, (n - 1) / 2 + 2);
-                rule2();
-                break;
-            case 7:
-                move2(1, (n / 2) + 1);
-                move3(n, (n / 2) + 3);
-                board[2][1] = -1;
-                break;
-            case 8:
-                move2(1, (n - 1) / 2 + 2);
-                move3(n, (n - 1) / 2 + 4);
-                board[1][1] = -1;
-                board[3][2] = -1;
-                break;
         }
     }
 
