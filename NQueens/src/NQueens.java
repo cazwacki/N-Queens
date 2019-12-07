@@ -10,22 +10,8 @@
  */
 public class NQueens {
 
-    private static boolean[][] board;
-    // "true" means that there is a queen in the given position.
-
-
-    /**
-     * The toggle() function toggles the boolean at the given index (ex. true ->
-     * false, false -> true).
-     * 
-     * @param column
-     *            the column on the chessboard where the boolean is located.
-     * @param row
-     *            the row on the chessboard where the boolean is located.
-     */
-    private static void toggle(int column, int row) {
-        board[column][row] = !board[column][row];
-    }
+    private static Queen[] queens;
+    private static int boardSize;
 
 
     /**
@@ -33,10 +19,8 @@ public class NQueens {
      * calculation. Should be used between finding solutions.
      */
     private static void reset() {
-        for (boolean[] row : board) {
-            for (boolean entry : row) {
-                entry = false;
-            }
+        for (int i = 0; i < queens.length; i++) {
+            queens[i] = null;
         }
     }
 
@@ -48,7 +32,63 @@ public class NQueens {
      *            The list of arguments when executing the program.
      */
     public static void main(String[] args) {
-        board = new boolean[3][3];
+        boardSize = 3;
+    }
+
+
+    /**
+     * A brute force solution to the N-Queens problem. It places all queens in
+     * every possible location without checking for safety, then evaluates the
+     * entire board for whether it is a valid solution to the n-queens problem.
+     * 
+     * @param printSolutions
+     *            If printSolutions is true, then every valid solution found by
+     *            the method will be printed to console.
+     */
+    private static void bruteForce(boolean printSolutions) {
+        for (int row1 = 0; row1 < boardSize; row1++) {
+
+        }
+    }
+
+
+    /**
+     * A utility function to check if a queen can
+     * be placed on board[row][col]. Note that this
+     * function is called when "col" queens are already
+     * placeed in columns from 0 to col -1. So we need
+     * to check only left side for attacking queens
+     */
+    private static boolean validSolution() {
+        // for each queen in the array
+        for (int a = 0; a < boardSize; a++) {
+            // for each queen after queen a
+            for (int b = a + 1; b < boardSize; b++) {
+                // Check if queens are on the same row.
+                if (queens[a].getRow() == queens[b].getRow()) {
+                    return false;
+                }
+
+                // Check if queens are on the same column.
+                if (queens[a].getColumn() == queens[b].getColumn()) {
+                    return false;
+                }
+
+                /*
+                 * Check if queens are on the same diagonal line.
+                 * This is verified by calculating the slope of the line
+                 * connecting the two queens. If the slope is 1, then the queens
+                 * are on the same diagonal line.
+                 */
+                int colDiff = queens[a].getColumn() - queens[b].getColumn();
+                int rowDiff = queens[a].getRow() - queens[b].getRow();
+                if (colDiff * 1.0 / rowDiff != 1) {
+                    return false;
+                }
+            }
+        }
+        // return true if none of the above conditions are met.
+        return true;
     }
 
 }
