@@ -62,6 +62,11 @@ public class SeriesAlg {
                 break;
         }
     }
+    
+    
+    private void analyze() {
+        
+    }
 
 
     /**
