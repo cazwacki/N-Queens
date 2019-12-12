@@ -1,4 +1,4 @@
-This demonstrates a series-based algorithmic to the N-Queens problem.
+This demonstrates a series-based algorithmic solution to the N-Queens problem.
 
 The N-Queens problem is a puzzle where 'N' queens must be placed on an 'N'x'N' chessboard such that no queen can attack any other queen on the board. As the board grows in size, the number of possible arrangements of queens increases at a multiplicative rate; hence a brute force method for determining the number of valid unique or distinct solutions becomes less viable as the size of the board increases. Consequently, researchers interested in combinatorics, algorithm development, and artificial intelligence have developed many approaches to the N-Queens problem. Here is a comparison of various interesting approaches to solving the N-Queens problem.
 
