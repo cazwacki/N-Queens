@@ -10,7 +10,7 @@
  */
 public class NQueens {
 
-    private static int boardSize = 15;
+    private static int boardSize = 21;
 
 
     /**

@@ -63,14 +63,19 @@ public class SeriesAlg {
                 break;
             case 5:
                 // completed
+                board = new int[n - 1][n - 1];
                 move2(0, n / 2 - 1);
                 move3(n - 1, n / 2 + 1);
+                board = sizeBoardUp();
+                analyze();
                 break;
             case 6:
                 // NOT WORKING
                 move2(1, (n - 1) / 2 - 1);
                 move3(n - 1, (n - 1) / 2 + 1);
-                rule2();
+                analyze();
+                // rule2();
+                break;
             case 7:
                 // completed
                 move2(0, n / 2);
@@ -177,7 +182,12 @@ public class SeriesAlg {
                     System.out.print("Q ");
                 }
                 else {
-                    System.out.print("- ");
+                    // System.out.print("- ");
+                    if(board[i][j] != 0) {
+                        System.out.print(board[i][j] + " ");
+                    } else {
+                        System.out.print("- ");
+                    }
                 }
             }
             System.out.println();
@@ -189,28 +199,7 @@ public class SeriesAlg {
      * Rule 2 is executed when the board falls within series S6.
      */
     private static void rule2() {
-        // increase the dimension of the chess board by one (row + 1, column +
-        // 1)
-        int[][] newBoard = new int[board.length + 1][board[0].length + 1];
-        for (int a = 0; a < board.length; a++) {
-            for (int b = 0; b < board[a].length; b++) {
-                newBoard[a][b] = board[a][b];
-            }
-        }
-        board = newBoard;
-        // remove the queen from i, j if i, n and i, j = 1 and | i - 1 | !=
-        // | n - j |
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][board[i].length - 1] == 1 && board[1][j] == 1) {
-                    if ((i - 1) != (board[i].length - 1 - j)) {
-                        if (board[i][j] == -1) {
-                            board[i][j] = 0;
-                        }
-                    }
-                }
-            }
-        }
+        
     }
 
 
