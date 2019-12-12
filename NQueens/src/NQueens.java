@@ -10,7 +10,7 @@
  */
 public class NQueens {
 
-    private static int boardSize = 21;
+    private static int boardSize = 9;
 
 
     /**
@@ -22,7 +22,7 @@ public class NQueens {
     public static void main(String[] args) {
         System.out.println("Board Size is " + boardSize);
         int[][] sAlgBoard = SeriesAlg.solve(boardSize);
-        
+
     }
 
 }

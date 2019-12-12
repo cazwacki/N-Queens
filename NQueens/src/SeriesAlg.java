@@ -63,18 +63,14 @@ public class SeriesAlg {
                 break;
             case 5:
                 // completed
-                board = new int[n - 1][n - 1];
                 move2(0, n / 2 - 1);
                 move3(n - 1, n / 2 + 1);
-                board = sizeBoardUp();
-                analyze();
                 break;
             case 6:
-                // NOT WORKING
+                // completed
                 move2(1, (n - 1) / 2 - 1);
                 move3(n - 1, (n - 1) / 2 + 1);
-                analyze();
-                // rule2();
+                rule2();
                 break;
             case 7:
                 // completed
@@ -90,13 +86,14 @@ public class SeriesAlg {
                 board[2][1] = -1;
                 break;
         }
+        analyze();
         printBoard();
         return board;
     }
 
 
     private static int[][] sizeBoardUp() {
-        int[][] newBoard = new int[boardSize][boardSize];
+        int[][] newBoard = new int[board.length + 1][board.length + 1];
         for (int i = 0; i < boardSize - 1; i++) {
             for (int j = 0; j < boardSize - 1; j++) {
                 newBoard[i][j] = board[i][j];
@@ -107,6 +104,13 @@ public class SeriesAlg {
 
 
     private static void analyze() {
+        for (int a = 0; a < board.length; a++) {
+            for (int b = 0; b < board[a].length; b++) {
+                if (board[a][b] != -1) {
+                    board[a][b] = 0;
+                }
+            }
+        }
         // mark paths where queens could potentially attack ,
         for (int a = 0; a < board.length; a++) {
             for (int b = 0; b < board[a].length; b++) {
@@ -183,9 +187,10 @@ public class SeriesAlg {
                 }
                 else {
                     // System.out.print("- ");
-                    if(board[i][j] != 0) {
+                    if (board[i][j] != 0) {
                         System.out.print(board[i][j] + " ");
-                    } else {
+                    }
+                    else {
                         System.out.print("- ");
                     }
                 }
@@ -199,7 +204,31 @@ public class SeriesAlg {
      * Rule 2 is executed when the board falls within series S6.
      */
     private static void rule2() {
-        
+        analyze();
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][board.length - 1] == board[0][j]
+                    && board[0][j] == 1) {
+                    if (i - 1 != board.length - 1 - j) {
+                        if (board[i][j] == -1) {
+                            x = i;
+                            y = j;
+                            board[i][j] = 0;
+                        }
+                    }
+                }
+            }
+        }
+        analyze();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 0 && (x != i || y != j)) {
+                    board[i][j] = -1;
+                }
+            }
+        }
     }
 
 
@@ -228,7 +257,7 @@ public class SeriesAlg {
      */
     private static void move2(int i, int j) {
         board[i][j] = -1;
-        for (int a = 0; (a + 2) < boardSize;) {
+        for (int a = 0; (a + 2) < board.length;) {
             i = i + 2;
             j = j - 1;
             board[i][j] = -1;
