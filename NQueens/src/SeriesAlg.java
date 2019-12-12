@@ -57,37 +57,35 @@ public class SeriesAlg {
                 move1(1, ((n - 1) - 1) / 3 - 1);
                 move1(0, (((n - 1) - 1) / 3) * 2);
                 move1(2, (n - 1) - 1);
-                printBoard();
                 board = sizeBoardUp();
-                printBoard();
                 // apply rule 1
                 rule1();
                 break;
             case 5:
-                // TODO NOT WORKING
+                // completed
                 move2(0, n / 2 - 1);
                 move3(n - 1, n / 2 + 1);
                 break;
             case 6:
-                // TODO NOT WORKING
-                move2(2, (n - 1) / 2);
-                move3(n, (n - 1) / 2 + 2);
+                // NOT WORKING
+                move2(1, (n - 1) / 2 - 1);
+                move3(n - 1, (n - 1) / 2 + 1);
                 rule2();
-                break;
             case 7:
-                // TODO NOT WORKING
-                move2(1, (n / 2) + 1);
-                move3(n, (n / 2) + 3);
-                board[2][1] = -1;
+                // completed
+                move2(0, n / 2);
+                move3(n - 1, n / 2 + 2);
+                board[1][0] = -1;
                 break;
             case 8:
-                // TODO NOT WORKING
-                move2(1, (n - 1) / 2 + 2);
-                move3(n, (n - 1) / 2 + 4);
-                board[1][1] = -1;
-                board[3][2] = -1;
+                // completed
+                move2(1, (n - 1) / 2 + 1);
+                move3(n - 1, (n - 1) / 2 + 3);
+                board[0][0] = -1;
+                board[2][1] = -1;
                 break;
         }
+        printBoard();
         return board;
     }
 
@@ -121,8 +119,7 @@ public class SeriesAlg {
      * 0 0 Q 0 0 | By incrementing the paths the queen can take by 1, we have
      * 0 1 1 1 0 | marked all positions in which another queen cannot be
      * 1 0 1 0 1 | placed. By doing this with multiple queens, we can isolate
-     * 0 0 1 0 0 | potential positions for future queens. The eligibl e
-     * positions
+     * 0 0 1 0 0 | potential positions for future queens. The eligible positions
      * 0 0 1 0 0 | will be designated with a value of 0 (as they have not been
      * incremented.
      * 
@@ -161,12 +158,10 @@ public class SeriesAlg {
     private static void rule1() {
         // call analyzer function with the updated dimensions
         analyze();
-        printBoard();
         // place a queen where position(x, y) = 0
         for (int a = 0; a < board.length; a++) {
             for (int b = 0; b < board[a].length; b++) {
                 if (board[a][b] == 0) {
-                    System.out.format("Location for queen at (%d, %d)\n", a, b);
                     board[a][b] = -1;
                     return;
                 }
@@ -260,9 +255,9 @@ public class SeriesAlg {
      * chessboard falls.
      */
     private static void move3(int i, int j) {
-        int count = 0;
+        int count = 1;
         board[i][j] = -1;
-        for (int a = boardSize - 1; a >= 0;) {
+        for (int a = boardSize - 1; (a - 2) >= 0;) {
             i = i - 2;
             if (count % 2 == 0) {
                 j = j + 3;
@@ -270,8 +265,11 @@ public class SeriesAlg {
             else {
                 j = j - 1;
             }
-            board[i][j] = 1;
+            if (j < board.length) {
+                board[i][j] = -1;
+            }
             a = i;
+            count++;
         }
     }
 
