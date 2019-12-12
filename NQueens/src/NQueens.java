@@ -32,7 +32,20 @@ public class NQueens {
      *            The list of arguments when executing the program.
      */
     public static void main(String[] args) {
-        boardSize = 3;
+        boardSize = 11;
+        int[][] sAlgBoard = SeriesAlg.solve(boardSize);
+        for (int i = 0; i < sAlgBoard.length; i++) {
+            for (int j = 0; j < sAlgBoard[i].length; j++) {
+                if (sAlgBoard[i][j] == -1) {
+                    System.out.print("Q ");
+                }
+                else {
+                    // System.out.print(sAlgBoard[i][j] + " ");
+                    System.out.print("- ");
+                }
+            }
+            System.out.println();
+        }
     }
 
 
