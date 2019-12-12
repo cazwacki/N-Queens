@@ -186,7 +186,8 @@ public class SeriesAlg {
                     System.out.print("Q ");
                 }
                 else {
-                    System.out.print("- ");
+                    System.out.print(board[i][j] + " ");
+                    // System.out.print("- ");
                 }
             }
             System.out.println();

@@ -1,8 +1,6 @@
 /**
  * The NQueens class calculates valid n-queens problems up to a specified size.
- * It uses different methods and calculates the speed of each one, noting the
- * efficiency and number of discovered solutions to note whether some algorithms
- * omit solutions or not.
+ * It uses the series methods and notes the analysis of each board.
  * 
  * @author Charles Zawacki
  * @version 12/6/2019
