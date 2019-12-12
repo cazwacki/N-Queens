@@ -10,7 +10,7 @@
  */
 public class NQueens {
 
-    private static int boardSize = 9;
+    private static int boardSize;
 
 
     /**
@@ -20,9 +20,10 @@ public class NQueens {
      *            The list of arguments when executing the program.
      */
     public static void main(String[] args) {
-        System.out.println("Board Size is " + boardSize);
-        int[][] sAlgBoard = SeriesAlg.solve(boardSize);
-
+        for(boardSize = 8; boardSize < 20; boardSize++) {
+            System.out.println("Board Size is " + boardSize);
+            SeriesAlg.solve(boardSize);
+        }
     }
 
 }
